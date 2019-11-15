@@ -94,7 +94,7 @@ done
 mkdir -p "${PICTURE_DIR}"
 
 # Parse bing.com and acquire picture URL(s)
-read -ra urls < <(curl -sL http://www.bing.com | grep -Eo "\"bgLink\" rel=\"preload\" href=\"(.*)hp\" as=\"image\"" | sed -e "s/\"bgLink\" rel=\"preload\" href=\"\([^']*\)\" as=\"image\".*/\1/")
+read -ra urls < <(curl -sL "https://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1" | grep -Eo "<url>(.*)</url>" | sed -e "s/<url>\([^’]*\)\<\/url>/\1/")
 
 
 for p in "${urls[@]}"; do
